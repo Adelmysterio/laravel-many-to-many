@@ -25,7 +25,7 @@ class UpdateProjectRequest extends FormRequest
         return [
             "name"=> ['required', 'string', Rule::unique('projects', 'name')->ignore($this->route('project')), 'min:4', 'max:255'],
             "type_id" =>['required'],
-            "tech"=> ['required', 'string', 'min:4', 'max:50'],
+            "technologies"=> ['required', 'array'],
             "url"=> ['required', 'string', 'min:4', 'max:255'],
             "content"=> ['required', 'string', 'min:4'],
         ];

@@ -14,7 +14,13 @@
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">ID Number: {{ $project->id }}</li>
                     <li class="list-group-item">{{ $project->type->name }}</li>
-                    <li class="list-group-item">{{ $project->tech }}</li>
+                    <li class="list-group-item">
+                        @forelse ($project->technologies as $technology)
+                            {{ $technology->name }}
+                        @empty
+                            No Tech
+                        @endforelse
+                    </li>
                     <li class="list-group-item"><a href="{{ $project->url }}">{{ $project->url }}</a></li>
                 </ul>
                 <div class="card-body">

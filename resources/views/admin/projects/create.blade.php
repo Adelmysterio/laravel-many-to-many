@@ -34,9 +34,16 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="tech">Tech:</label>
-                    <input class="form-control" type="text" id="tech" name="tech"
-                        value="{{ old('tech') }}" required>
+                    <label class="d-block" for="technology">Tech:</label>
+                    <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+                        @foreach ($technologies as $technology)
+                        <input name="technologies[]" type="checkbox" class="btn-check" id="selected-check-{{ $technology->id }}" value="{{ $technology->id }}">
+                        <label class="btn btn-outline-primary" for="selected-check-{{ $technology->id }}">{{ $technology->name }}</label>
+
+                        @endforeach
+
+
+                      </div>
                 </div>
 
                 <div class="form-group">

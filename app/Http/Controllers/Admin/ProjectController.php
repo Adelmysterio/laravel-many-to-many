@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Project;
+use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Http\Request;
 
@@ -23,10 +24,11 @@ class ProjectController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Technology $technologies)
     {
+        $technologies = Technology::all();
         $types = Type::all();
-        return view('admin.projects.create', compact('types'));
+        return view('admin.projects.create', compact('types', 'technologies'));
     }
 
     /**
@@ -38,6 +40,7 @@ class ProjectController extends Controller
         $data = $request->validated();
         $newProject = new Project($data);
         $newProject->save();
+        $newProject->technologies()->sync($data["technologies"]);
         return redirect()->route('admin.projects.show', $newProject);
     }
 
@@ -52,10 +55,11 @@ class ProjectController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Project $project)
+    public function edit(Project $project, Technology $technologies)
     {
         $types = Type::all();
-        return view('admin.projects.edit', compact('project', 'types'));
+        $technologies = Technology::all();
+        return view('admin.projects.edit', compact('project', 'types', 'technologies'));
     }
 
     /**
@@ -65,6 +69,7 @@ class ProjectController extends Controller
     {
         $data = $request->validated();
         $project->update($data);
+        $project->technologies()->sync($data["technologies"]);
         return redirect()->route('admin.projects.show', $project);
     }
 
