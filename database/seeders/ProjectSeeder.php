@@ -20,7 +20,6 @@ class ProjectSeeder extends Seeder
             $newProject = new Project();
             $newProject->type_id = $faker->randomElement($types);
             $newProject->name = $faker->name();
-            $newProject->tech = $faker->word();
             $newProject->content = $faker->realText();
             $newProject->url = $faker->url();
             $newProject->save();
