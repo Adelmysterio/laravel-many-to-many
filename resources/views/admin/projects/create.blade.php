@@ -15,7 +15,7 @@
                     </ul>
                 </div>
             @endif
-            <form action="{{ route('admin.projects.store') }}" method="POST" class="col-6">
+            <form action="{{ route('admin.projects.store') }}" method="POST" class="col-6" enctype="multipart/form-data">
                 @csrf
 
                 <div class="form-group">
@@ -44,6 +44,12 @@
 
 
                       </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="image">image:</label>
+                    <input class="form-control" type="file" id="image" name="image"
+                        value="{{ old('image') }}" required>
                 </div>
 
                 <div class="form-group">

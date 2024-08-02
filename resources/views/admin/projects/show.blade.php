@@ -10,6 +10,7 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ $project->name }}</h5>
                     <p class="card-text">{{ $project->content }}</p>
+                    <img src="{{ asset('storage/' . $project->image) }}" alt="">
                 </div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">ID Number: {{ $project->id }}</li>

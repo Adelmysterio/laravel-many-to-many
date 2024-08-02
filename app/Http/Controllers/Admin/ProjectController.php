@@ -9,6 +9,7 @@ use App\Models\Project;
 use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -36,8 +37,9 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-
         $data = $request->validated();
+        $img_path = Storage::put('uploads/projects', $data['image']);
+        $data['image'] = $img_path;
         $newProject = new Project($data);
         $newProject->save();
         $newProject->technologies()->sync($data["technologies"]);
